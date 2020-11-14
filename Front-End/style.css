@@ -1,17 +1,18 @@
 
-	body {
-            background-color: white;
-        }
-        #container {
-            width: 100%;
-            font-family: Arial;
-        }
+body {
+    background-color: white;
+    font-family: Arial;
+}
+        
+            
+        
         
         #scoreboardDiv {
             position: absolute;
             right: 35%;
             top: 6%;
             width: 400px;
+            height: 200px;
           
         }
         
@@ -40,7 +41,7 @@
         
         #tableDiv{
             position:absolute;
-            right:24%;
+            right:25%;
             top:30%;
            
             margin-bottom: 40px;
@@ -61,7 +62,10 @@
         
         #textareaDiv{
             position: absolute;
-            right: 38%;
+            right: 35%;
             bottom: 10%;
+            width: 400px;
+            text-align: center;
+            
         }
     
