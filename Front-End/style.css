@@ -46,7 +46,7 @@ body {
         #tableDiv{
             position:absolute;
             right:25%;
-            top:30%;
+            top:22%;
            
             margin-bottom: 40px;
             
@@ -67,7 +67,7 @@ body {
         #textareaDiv{
             position: absolute;
             right: 36%;
-            bottom: 10%;
+            bottom: 3%;
             width: 400px;
             text-align: center;
             
