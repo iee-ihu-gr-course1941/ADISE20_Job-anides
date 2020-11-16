@@ -91,8 +91,10 @@ and open the template in the editor.
             
             <div id="textareaDiv">
                 <form name='form' action="main.php" method="GET" onsubmit="return CheckValue()">
-                    <label>Give a move:</label>
-                    <input type="text" id="moveID" name="moveName" hint="Δωσε δυο αριθμους κολλητα">
+                    <label>Δωσε γραμμη:</label>
+                    <input type="text" id="moveRow" name="moveRowName" placeholder="Απο 0-5"><br>
+                    <label>Δωσε στηλη:</label>
+                    <input type="text" id="moveCell" name="moveCellName" placeholder="Απο 0-6">
                     <input type="submit" id="submitID" name="submitName" value="Submit">
                 </form>
                    
