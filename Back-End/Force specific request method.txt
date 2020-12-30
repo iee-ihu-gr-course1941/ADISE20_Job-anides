@@ -1,0 +1,2 @@
+data:text/html,<body onload="document.body.firstChild.submit()"><form method="post" action="http://localhost/MyProject/Back-End/Score4.php/board/">
+Αντιγράφεις όλη την γραμμή 1 και την βάζεις σαν url στον browser. Για δοκιμή άλλων μεθόδων άλλαξε το method.

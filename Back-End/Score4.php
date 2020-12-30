@@ -1,6 +1,6 @@
 <?php
 
-require_once "dbConnect.php";
+require_once "Database/dbConnect.php";
 
 $method = $_SERVER['REQUEST_METHOD'];
 $request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
