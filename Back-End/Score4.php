@@ -1,11 +1,11 @@
 <?php
 
-require_once "Database/dbConnect.php";
+require_once "dbConnect.php";
 
 $method = $_SERVER['REQUEST_METHOD'];
 $request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
 $input = json_decode(file_get_contents('php://input'),true);
-$requestTypeA = array_shift($request);
+$requestType = array_shift($request);
 
 if ($requestType == 'board'){
     request_board(array_shift($request), $method);    
@@ -24,12 +24,12 @@ function request_board($requestType, $methodType){
             break;
         
         case '' || null :
-            if ($methodType == 'GET' || $methodType == 'POST')
-                board();
-            
-            else 
+            if ($methodType == 'GET' || $methodType == 'POST') {
+                board($methodType);
+            } else {
                 header("HTTP/1.1 404 Not Found");
-            
+            }
+
             break;
             
         default :
@@ -39,13 +39,13 @@ function request_board($requestType, $methodType){
 }
 
 
-// Να τεστάρω αν δουλεύει
+// Συνάρτηση εμφάνισης και επαναφοράς του board.
 function board($methodType){
+    global $mysqli;
     if ($methodType == 'POST'){
         $sql = 'CALL reset_board()';
-        $msqli -> query($sql0);
+        $mysqli -> query($sql);
     }
-    $mysqli;
     $sql = 'SELECT * FROM game_board';
     $prepare = $mysqli -> prepare($sql);
 
@@ -55,9 +55,3 @@ function board($methodType){
     header('Content-type: application/json');
     print json_encode($result->fetch_all(MYSQLI_ASSOC), JSON_PRETTY_PRINT);
 }
-
-
-
-
-
-        
