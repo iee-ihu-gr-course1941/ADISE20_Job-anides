@@ -34,7 +34,7 @@ function board($methodIs){
 
 function boardColumn($methodIs, $column){
     global $mysqli;
-    // Εδώ θα μπει η κίνηση, πρόσθεσε τον κώδικα αργότερα.
+	// Εδώ θα μπει η κίνηση, πρόσθεσε τον κώδικα αργότερα.
     if ($methodIs == 'PUT'){
         echo "put";
     }
