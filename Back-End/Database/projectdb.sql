@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2020 at 09:17 PM
+-- Generation Time: Jan 03, 2021 at 04:11 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -102,6 +102,54 @@ CREATE TABLE `game_board` (
   `tile_colour` enum('r','y') COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Dumping data for table `game_board`
+--
+
+INSERT INTO `game_board` (`row`, `column`, `tile_colour`) VALUES
+(0, 0, ''),
+(0, 1, ''),
+(0, 2, ''),
+(0, 3, ''),
+(0, 4, ''),
+(0, 5, ''),
+(0, 6, ''),
+(1, 0, ''),
+(1, 1, ''),
+(1, 2, ''),
+(1, 3, ''),
+(1, 4, ''),
+(1, 5, ''),
+(1, 6, ''),
+(2, 0, ''),
+(2, 1, ''),
+(2, 2, ''),
+(2, 3, ''),
+(2, 4, ''),
+(2, 5, ''),
+(2, 6, ''),
+(3, 0, ''),
+(3, 1, ''),
+(3, 2, ''),
+(3, 3, ''),
+(3, 4, ''),
+(3, 5, ''),
+(3, 6, ''),
+(4, 0, ''),
+(4, 1, ''),
+(4, 2, ''),
+(4, 3, ''),
+(4, 4, ''),
+(4, 5, ''),
+(4, 6, ''),
+(5, 0, ''),
+(5, 1, ''),
+(5, 2, ''),
+(5, 3, ''),
+(5, 4, ''),
+(5, 5, ''),
+(5, 6, '');
+
 -- --------------------------------------------------------
 
 --
@@ -111,7 +159,7 @@ CREATE TABLE `game_board` (
 CREATE TABLE `game_status` (
   `status` enum('not active','initialized','started','ended','aborted') COLLATE utf8_bin NOT NULL DEFAULT 'not active',
   `player_turn` enum('r','y') COLLATE utf8_bin DEFAULT NULL,
-  `result` enum('r','y') COLLATE utf8_bin DEFAULT NULL,
+  `result` enum('r','y','d') COLLATE utf8_bin DEFAULT NULL,
   `last_change` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -132,7 +180,9 @@ DELIMITER ;
 
 CREATE TABLE `players` (
   `username` varchar(20) COLLATE utf8_bin DEFAULT NULL,
-  `player_colour` enum('r','y') COLLATE utf8_bin NOT NULL
+  `player_colour` enum('r','y') COLLATE utf8_bin NOT NULL,
+  `token` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `last_action` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
