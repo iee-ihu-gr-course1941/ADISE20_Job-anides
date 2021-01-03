@@ -43,23 +43,22 @@ function createTable(){
         }
         tableDiv.appendChild(table);
         table.setAttribute("id", "table");
-        
-}
+}        
 
 //Γεμισμα του κελιου με το καταληλο χρωμα
-function ColorisedTheCell(){
-    var cell=document.getElementById('moveCell').value; //Το κελι
-    var row= //Η γραμμη που θα χρωματιστει
-    var player= //ο παιχτης που παιζει
-    var tableID=document.getElementById('table');
+//function ColorisedTheCell(){
+  //  var cell=document.getElementById('moveCell').value; //Το κελι
+    //var row= //Η γραμμη που θα χρωματιστει
+    //var player= //ο παιχτης που παιζει
+    //var tableID=document.getElementById('table');
 
-    if (player=='r'){
-        tableID.rows[row].cells[cell].style.backgroundColor="red";
-    }else if (player=='y'){
-        tableID.rows[row].cells[cell].style.backgroundColor="yellow";
-    }
+   // if (player=='r'){
+     //   tableID.rows[row].cells[cell].style.backgroundColor="red";
+    //}else if (player=='y'){
+     //   tableID.rows[row].cells[cell].style.backgroundColor="yellow";
+    //}
     
-}
+//}
 
 
 //Αποστολη την κινησης
