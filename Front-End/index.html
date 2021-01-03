@@ -15,7 +15,7 @@ and open the template in the editor.
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
         
     </head>
-    <body>
+    <body onload="createTable()">
         <div id="container">
             <div id="scoreboardDiv">
                 <p style='margin:0px;'>Scoreboard</p>
@@ -31,74 +31,16 @@ and open the template in the editor.
             </div> 
             
             <div id="tableDiv">
-                <p id="playerTurn" style="text-align:center;font-size: 22px;font-weight: bold;">Παιζει ο πρωτος παιχτης</p> 
-                <table id="table">
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </table>
+            
             </div>
             
             
             <div id="textareaDiv">
-                
-                    <label>Δωσε γραμμη:</label>
-                    <input type="text" id="moveRow" name="moveRowName" placeholder="Απο 0-5"><br>
+                <form onsubmit="CheckValue()">
                     <label>Δωσε στηλη:</label>
                     <input type="text" id="moveCell" name="moveCellName" placeholder="Απο 0-6">
-                    <input type="submit" id="submitID" name="submitName" value="Submit" onclick="CheckParameters ()">
-               
+                    <input type="submit" id="submitID" name="submitName" value="Submit" >
+                </form>
                    
             </div>
         </div>

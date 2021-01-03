@@ -2,74 +2,65 @@
 //Συναρτηση Ελεγχου πληθους γραμματων σε text
 function LengthCheck(objID){
     //Αρχικοποιηση μεταβλητων
-    var objValue=objID.value; //Η τιμη του objID
-    var objStyle="" //Μεταβληξτηγια το αμα ειναι στηλη η γραμμη 
-    
-    switch (objID){                         /*Case για την ευρεση αμα μιλαμε για σειρα η στηλη */
-        case moveRow:
-            objStyle="για την γραμμη"; 
-            break;
-        case moveCell:
-            objStyle="για την στηλη";
-            break;
-    }
+    var objValue=objID.value; //Η τιμη του objID  
 
     if (objValue.length!=1 || objValue==""){  //ελεγχος για το πληθος των γραμματων
-        alert("Δωσε εναν αριθμο "+objStyle);
-        return false;     
+        return true;     
     }
-    return true;
+    return false;
     
 }
+
 //Συναρτηση Ελεγχου Τιμης 
-function CheckValue(objID) {
-    if (objID==moveRow){                       //Ελεγχος για πιο Obj μιλαμε
-        var RowValue=parseInt(objID.value);
-        if (isNaN(RowValue)){  
-            alert("ΜΗ αριθμητικο στοιχειο!");                //Ελεγχος για αμα δωσει κενο μετα το parse το καινο μετατρεπεται σε NaN στοιχειο
-            return false;
-        }
-        if ((RowValue<=-1) || (RowValue>=6)){  //Ελεγχος για την τιμη του Row
-            alert ("Τιμη πανω απο τα ορια 0-5");
-            return false;
-        }
-    }else{
-        var CellValue=parseInt(objID.value);  
-        if (isNaN(CellValue)){
-            alert("ΜΗ αριθμητικο στοιχειο!");         //Ελεγχος για αμα δωσει κενο μετα το parse το καινο μετατρεπεται σε NaN στοιχειο
-            return false;
-        }
-        if ((CellValue<=-1) || (CellValue>=7)){     //Ελεγχος για την τιμη του Cell
-            alert ("Τιμη πανω απο τα ορια 0-6");
-            return false;
-            
-        }
-    }       
-    return true;
+function CheckValue() {
+    var cellID=document.getElementById('moveCell');                           
+    var CellValue=parseInt(cellID.value);
+    
+    if ( (isNaN(CellValue)) || (LengthCheck(cellID)) || (CellValue<0) || (CellValue>6) ){
+        alert("Λαθος Καταχωρηση! Δωσε σωστη τιμη στην στηλη!");
+    }
+    
 
+           
+    
+}
+
+//Δημιουργια πινακα
+function createTable(){
+        var tableDiv=document.getElementById('tableDiv'); 
+        var p=document.createElement("p");
+        p.setAttribute("id", "playerTurn");
+        p.innerHTML="Παιζει ο πρωτος παιχτης";
+        tableDiv.appendChild(p);
+        var table=document.createElement("table");
+        for (row=0;row<6;row++){
+            var tr=document.createElement("tr");
+            for (cell=0;cell<7;cell++){
+                var td=document.createElement("td");
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        }
+        tableDiv.appendChild(table);
+        table.setAttribute("id", "table");
+        
+}
+
+//Γεμισμα του κελιου με το καταληλο χρωμα
+function ColorisedTheCell(){
+    var cell=document.getElementById('moveCell').value; //Το κελι
+    var row= //Η γραμμη που θα χρωματιστει
+    var player= //ο παιχτης που παιζει
+    var tableID=document.getElementById('table');
+
+    if (player=='r'){
+        tableID.rows[row].cells[cell].style.backgroundColor="red";
+    }else if (player=='y'){
+        tableID.rows[row].cells[cell].style.backgroundColor="yellow";
+    }
+    
 }
 
 
+//Αποστολη την κινησης
 
-
-/* Μεθοδος για το αμαη τιμη του tag με id moveID (input-text) ειναι επιτρεπτη */
-function CheckParameters (){ 
-    var textRowID=document.getElementById('moveRow'); //ID row
-    var textCellID=document.getElementById('moveCell'); //ID cell
-    if (!LengthCheck(textRowID)){
-        textRowID.value="";
-    }
-    if (!LengthCheck(textCellID)){
-        textCellID.value="";
-    }
-    if (!CheckValue(textRowID)){ //ΕΛεγχος για αμα δωθει λαθος τιμη να ξαναγινει το text κενο
-        textRowID.value="";
-    }    
-    if (!CheckValue(textCellID)){  //ΕΛεγχος για αμα δωθει λαθος τιμη να ξαναγινει το text κενο
-        textCellID.value="";
-    } 
-    return true; 
-
-
-    /* ΚΩΔΙΚΑ ΓΙΑ HTML ESCAPING */
-}
