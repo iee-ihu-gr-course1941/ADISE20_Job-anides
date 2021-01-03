@@ -8,7 +8,7 @@ function board($methodIs){
         $sql = 'CALL reset_board()';
         $mysqli -> query($sql);
     }
-    $result = sql('SELECT * FROM `game_board` WHERE `column` = 3');
+    $result = sql('SELECT * FROM `game_board`');
     header('Content-type: application/json');
     print $result;
 }
