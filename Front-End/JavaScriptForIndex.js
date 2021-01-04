@@ -33,27 +33,40 @@ function CheckValue() {
 //Δημιουργια πινακα
 function createTable(){
         var t='<table id="table">';
-        for (var row=6 ; row>0 ; row--){
+        for (var row=5 ; row>-1 ; row--){
             t += '<tr>';
             for (var cell=0 ; cell<7 ; cell++){
-                t+= '<td  id="cell_'+row+'_'+cell+'"></td>'; 
+                t+= '<td  id="cell_'+row+'_'+cell+'">  Στηλη: '+cell+'</td>'; 
             }
             t+='</tr>';
         }
         t+='</table>';
-        // var p='<p id="playertrun">Παιζει πρωτος ο κιτρινος!</p>';
-        //$('#tableDiv').html(p);
         $('#tableDiv').html(t);
 }        
 
-//Περασμα το json αρχειου
+//Περασμα το json αρχειου με get 
 function fill_board(){
-   $.ajax({url:"Score4.php/board/", success: fill_board_by_data});
+   $.ajax({url:"../Back-End/Score4.php/board/", success: fill_board_by_data});
        
 }
 
+//Γεμισμα του board με τα χτοιχεια απο το json αρχειο που επεστρεψε η fill_board()[method:get] 
 function fill_board_by_data(data){
-    for (var item=0 ; item<data.length ; item++){
+    for (var i=0 ; i<data.length ; i++){
+        var item=data[i];
+        var id='#cell_'+ item.row + '_' + item.column;
+        var color=item.tile_colour;
+        switch (color){
+            case '':
+                $(id).css("background-color","white");
+                break;
+            case 'r':
+                $(id).css("background-color","red");
+                break;
+            case 'y':
+                $(id).css("background-color","yellow");
+                break;
+        }
 
     }
 }
