@@ -22,7 +22,7 @@ and open the template in the editor.
   
     </head>
     <body>
-        <div id="container">
+        
           <!--  <div id="scoreboardDiv">
                 <p style='margin:0px;'>Scoreboard</p>
                 <div id="firstplayerDiv" >
@@ -35,13 +35,30 @@ and open the template in the editor.
                 </div>
                 
             </div> -->
-            <p id="playerturn">Παιζει πρωτος ο κιτρινος!</p>
+
+            <!--<h1 id="playerturn">Παιζει πρωτος ο κιτρινος!</h1>-->
+            <h1> Score4</h1>
             <div id="tableDiv">
                 
             </div>
-            
-            
-            <div id="textareaDiv">
+
+            <!-- Πληροφοριες για το παιχνιδι-->
+            <div id="gameinfoDiv">
+                <h4 id="playerturn">Εισοδος στο παιχνίδι!</h4>
+            </div>
+
+             <!-- ΤΟ ΜΕΡΟΣ ΠΟΥ ΚΑΝΕΙ LOGIN Ο ΧΡΗΣΤΗΣ-->   
+            <div id='loginDiv'>
+                <input id='username' placeholder="Δωσε username!"> 
+                <select id='pcolor'>
+                <option value='r'>R</option>
+                <option value='y'>Y</option>
+                </select>
+                <button id='login' class='btn btn-primary'>ΕΙΣΟΔΟΣ ΣΤΟ ΠΑΙΧΝΙΔΙ</button><br>
+            </div>
+           
+            <!-- ΤΟ ΜΕΡΟΣ ΠΟΥ ΔΙΝΕΤΑΙ Η ΚΙΝΗΣΗ!-->
+            <div id="moveDiv">
                 <form >
                     <label>Δωσε στηλη:</label>
                     <input type="text" id="moveCell" name="moveCellName" placeholder="Απο 0-6">
@@ -49,6 +66,6 @@ and open the template in the editor.
                 </form>
                    
             </div>
-        </div>
+        
     </body>
 </html>

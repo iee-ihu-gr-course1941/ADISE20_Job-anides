@@ -39,16 +39,39 @@ body {
             text-align: center;
             
         }
+
+
+
+
+        h1{
+            position: absolute;
+            right: 46%;
+            top: 15%;
+        }
+
+        #gameinfoDiv{
+            position: absolute;
+            right: 44%;
+            top: 55%;
+        }
+
+        #loginDiv{
+            position: absolute;
+            right: 37%;
+            top: 60%;
+        }
+
+        #moveDiv{
+            position: absolute;
+            right: 40%;
+            top: 65%;
+        }
         
         #tableDiv{
             position:absolute;
             right:30%;
-            top:22%;
-           
-            margin-bottom: 40px;
-            
-            
-                       
+            top:22%; 
+            margin-bottom: 40px;                
         }
         
         #table,td {
@@ -61,22 +84,7 @@ body {
                       
         }
         
-        #textareaDiv{
-            position: absolute;
-            right: 40%;
-            bottom: 15%;
-            width: 400px;
-            text-align: center;
-            
-        }
+        
         
 
-        #playerturn{
-            text-align:center;
-            font-size: 22px;
-            font-weight: bold;
-            position: absolute;
-            top: 15%;
-            left: 43%;
-            
-        }
+        

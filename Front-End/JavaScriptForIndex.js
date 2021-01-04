@@ -1,11 +1,11 @@
 
+var me={};
 
-
-//$("#submitID").click(CheckValue); // Χρηση JQuery για οταν πατηθει το submit 
 
 $(function (){
-    createTable();
-    fill_board();
+    //createTable();
+    //fill_board();
+    $("#login").click(login_to_game);
    // $("#submitID").click(CheckValue); // Χρηση JQuery για οταν πατηθει το submit
 });
 
@@ -29,6 +29,42 @@ function CheckValue() {
     }
                   
 }
+
+
+//Εισοδος στο παιχνιδι
+function login_to_game() {
+	if($('#username').val()=='') {
+		alert('You have to set a username');
+		return;
+	}
+	var p_color = $('#pcolor').val();
+	createTable()
+	fill_board();	
+	$.ajax({url: "../Back-End/Score4.php/players/"+p_color, 
+			method: 'PUT',
+			dataType: "json",
+			contentType: 'application/json',
+			data: JSON.stringify( {username: $('#username').val(), player_colour: p_color}),
+			success: login_result,
+			error: login_error});
+}
+
+//Επιτυχης Εισοδος στο παιχνιδι
+function login_result(data) {
+	me = data[0];
+	$('#loginDiv').hide();
+	//update_info();
+	//game_status_update();
+}
+
+//Αποτυχημενη Συνδεση στο παιχνιδι
+function login_error(data,y,z,c) {
+	var x = data.responseJSON;
+	alert(x.errormesg);
+}
+
+//function update_info(){
+//	$('#game_info').html("I am Player: "+me.piece_color+", my name is "+me.username +'<br>Token='+me.token+'<br>Game state: '+game_status.status+', '+ game_status.p_turn+' must play now.');
 
 //Δημιουργια πινακα
 function createTable(){
@@ -62,9 +98,11 @@ function fill_board_by_data(data){
                 break;
             case 'r':
                 $(id).css("background-color","red");
+                $(id).text("");
                 break;
             case 'y':
                 $(id).css("background-color","yellow");
+                $(id).text("");
                 break;
         }
 
@@ -73,25 +111,6 @@ function fill_board_by_data(data){
 
 
 
-//Γεμισμα του κελιου με το καταληλο χρωμα
-/* function ColorisedTheCell(){
-    var cell=document.getElementById('moveCell').value; //Το κελι
-    var row= //Η γραμμη που θα χρωματιστει
-    var player= //ο παιχτης που παιζει
-    var tableID=document.getElementById('table');
-
-    switch (player){
-        case 'r':
-            tableID.rows[row].cells[cell].style.backgroundColor="red";
-            break;
-        case 'w':
-            tableID.rows[row].cells[cell].style.backgroundColor="yellow";
-            break;
-    }
-    
-    }
-    
-} */ 
 
 
 
