@@ -24,15 +24,15 @@ function setPlayerName($colour, $input){
     }   
     
     $username=$input['username'];
-    $sql = "SELECT COUNT(*) AS counter FROM `players` WHERE `player_colour` = '$colour' AND `username` IS NOT NULL";
+    $sql = "SELECT COUNT(*) AS c FROM `players` WHERE `player_colour` = '$colour' AND `username` IS NOT NULL";
     $result = sql($sql);
-    if ($result[0]['counter'] > 0) {
+    if ($result[0]['c'] > 0) {
         header("HTTP/1.1 400 Bad Request");
 	print json_encode(['errormesg'=>"Player $colour is already set. Please select another color."]);
 	exit;
     }
     
-    $query = "UPDATE `players` SET `username`= '$username', `token` = MD5(CONCAT('$input', NOW())) WHERE `player_colour` = '$colour'";
+    $query = "UPDATE `players` SET `username`= '$username', `token` = MD5(CONCAT('$username', NOW())) WHERE `player_colour` = '$colour'";
     $mysqli -> query($query);
     
     updateGameStatus();
