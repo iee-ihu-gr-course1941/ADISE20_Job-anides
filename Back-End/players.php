@@ -32,7 +32,7 @@ function setPlayerName($colour, $input){
 	exit;
     }
     
-    $query = "UPDATE `players` SET `username`= '$input', `token` = MD5(CONCAT('$input', NOW())) WHERE `player_colour` = '$colour'";
+    $query = "UPDATE `players` SET `username`= '$username', `token` = MD5(CONCAT('$input', NOW())) WHERE `player_colour` = '$colour'";
     $mysqli -> query($query);
     
     updateGameStatus();
