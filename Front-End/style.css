@@ -41,30 +41,28 @@ body {
         }
 
 
-
-
         h1{
             position: absolute;
             right: 46%;
-            top: 15%;
+            top: 10%;
         }
 
         #gameinfoDiv{
             position: absolute;
             right: 44%;
-            top: 55%;
+            top: 60%;
         }
 
         #loginDiv{
             position: absolute;
             right: 37%;
-            top: 60%;
+            top: 70%;
         }
 
         #moveDiv{
             position: absolute;
             right: 40%;
-            top: 65%;
+            top: 80%;
         }
         
         #tableDiv{
@@ -82,6 +80,12 @@ body {
             text-align: center;
             font-style: bold;
                       
+        }
+
+        #dbutton{
+            position:absolute;
+            right:30%;
+            top:80%;     
         }
         
         

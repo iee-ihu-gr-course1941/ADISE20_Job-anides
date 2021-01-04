@@ -59,13 +59,16 @@ and open the template in the editor.
            
             <!-- ΤΟ ΜΕΡΟΣ ΠΟΥ ΔΙΝΕΤΑΙ Η ΚΙΝΗΣΗ!-->
             <div id="moveDiv">
-                <form >
+                
                     <label>Δωσε στηλη:</label>
                     <input type="text" id="moveCell" name="moveCellName" placeholder="Απο 0-6">
-                    <input type="submit" id="submitID" name="submitName" value="Submit" >
-                </form>
+                    <input type="submit" class='btn btn-primary' id="move" name="submitName" value="Κανε την κινηση!" >
+                
                    
             </div>
-        
+
+            <div id="dbutton"  style="position: absolute;right: 30%;top: 80%;">
+                <button class='btn btn-primary' id='reset'>RESET</button>
+            </div>    
     </body>
 </html>

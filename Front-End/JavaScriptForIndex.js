@@ -1,11 +1,18 @@
 
 var me={};
-
+var game_status={};
+var board={};
 
 $(function (){
     //createTable();
     //fill_board();
     $("#login").click(login_to_game);
+    $('#reset').click( reset_board);
+    $('#move').click( do_move);
+	$('#moveDiv').hide();
+    game_status_update();
+    
+    
    // $("#submitID").click(CheckValue); // Χρηση JQuery για οταν πατηθει το submit
 });
 
@@ -63,8 +70,39 @@ function login_error(data,y,z,c) {
 	alert(x.errormesg);
 }
 
-//function update_info(){
-//	$('#game_info').html("I am Player: "+me.piece_color+", my name is "+me.username +'<br>Token='+me.token+'<br>Game state: '+game_status.status+', '+ game_status.p_turn+' must play now.');
+
+//Ενημερωνει το παιδιο με id gameinfoDiv το ποιος παιχτης παιζει
+function update_info(){
+	$('#gameinfoDiv').html("I am Player: "+me.player_colour+", my name is "+me.username +'<br>Token='+me.token+'<br>Game state: '+game_status.status+', '+ game_status.player_turn+' must play now.');
+
+}
+
+
+//Μεταφορα δεδο με json 
+function game_status_update() {
+	$.ajax({url: "../Back-End/Score4.php/status/", success: update_status,headers: {"X-Token": me.token} });
+}
+
+//Κανη update το status του παιχνιδιου 
+function update_status(data) {
+    var game_status_old=game_status;
+	game_status=data[0];
+	update_info();
+	if(game_status.player_turn==me.player_colour &&  me.player_colour!='') { //ισως χρειαστη αλλαγη σε null
+		x=0;
+        // do play
+        if (game_status_old.player_turn!=me.player_colour){
+            fill_board();
+        }
+		$('#moveDiv').show(1000);
+		setTimeout(function() { game_status_update();}, 15000);
+	} else {
+		// must wait for something
+		$('#moveDiv').hide(1000);
+		setTimeout(function() { game_status_update();}, 4000);
+	}
+ 	
+}
 
 //Δημιουργια πινακα
 function createTable(){
@@ -82,12 +120,19 @@ function createTable(){
 
 //Περασμα το json αρχειου με get 
 function fill_board(){
-   $.ajax({url:"../Back-End/Score4.php/board/", success: fill_board_by_data});
+  // $.ajax({url:"../Back-End/Score4.php/board/", success: fill_board_by_data});
+   $.ajax({url: "../Back-End/Score4.php/board/", 
+		headers: {"X-Token": me.token},
+			//dataType: "json",
+			//contentType: 'application/json',
+			//data: JSON.stringify( {token: me.token}),
+			success: fill_board_by_data });
        
 }
 
 //Γεμισμα του board με τα χτοιχεια απο το json αρχειο που επεστρεψε η fill_board()[method:get] 
 function fill_board_by_data(data){
+    board=data;
     for (var i=0 ; i<data.length ; i++){
         var item=data[i];
         var id='#cell_'+ item.row + '_' + item.column;
@@ -109,11 +154,13 @@ function fill_board_by_data(data){
     }
 }
 
+//Φερνει τον πινακα στην default morfh toy (default_game_board) στην βαση
+function reset_board() {
+	$.ajax({url: "../Back-End/Score4.php/board/", method: 'POST',  success: fill_board_by_data });
+	$('#moveDiv').hide();
+	$('#loginDiv').show(2000);
 
-
-
-
-
+}
 //Ελεγχος για το αμα τελειωσε το παιχνιδι
 
 
