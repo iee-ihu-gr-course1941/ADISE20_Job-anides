@@ -1,4 +1,11 @@
 
+
+$("body").onload(createTable); //Χρηση JQuery εμφανιση του πινακα 
+
+$(document).ready(function(){
+    $("body").onload(createTable); //Χρηση JQuery εμφανιση του πινακα 
+    $("#submitID").click(CheckValue); // Χρηση JQuery για οταν πατηθει το submit 
+});
 //Συναρτηση Ελεγχου πληθους γραμματων σε text
 function LengthCheck(objID){
     //Αρχικοποιηση μεταβλητων
@@ -19,10 +26,7 @@ function CheckValue() {
     if ( (isNaN(CellValue)) || (LengthCheck(cellID)) || (CellValue<0) || (CellValue>6) ){
         alert("Λαθος Καταχωρηση! Δωσε σωστη τιμη στην στηλη!");
     }
-    
-
-           
-    
+                  
 }
 
 //Δημιουργια πινακα
@@ -46,19 +50,28 @@ function createTable(){
 }        
 
 //Γεμισμα του κελιου με το καταληλο χρωμα
-function ColorisedTheCell(){
+/* function ColorisedTheCell(){
     var cell=document.getElementById('moveCell').value; //Το κελι
     var row= //Η γραμμη που θα χρωματιστει
     var player= //ο παιχτης που παιζει
     var tableID=document.getElementById('table');
 
-    if (player=='r'){
-       tableID.rows[row].cells[cell].style.backgroundColor="red";
-    }else if (player=='y'){
-       tableID.rows[row].cells[cell].style.backgroundColor="yellow";
+    switch (player){
+        case 'r':
+            tableID.rows[row].cells[cell].style.backgroundColor="red";
+            break;
+        case 'w':
+            tableID.rows[row].cells[cell].style.backgroundColor="yellow";
+            break;
     }
     
-}
+    }
+    
+} */ 
+
+
+
+//Ελεγχος για το αμα τελειωσε το παιχνιδι
 
 
 //Αποστολη την κινησης
