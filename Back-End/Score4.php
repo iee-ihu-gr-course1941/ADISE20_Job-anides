@@ -13,9 +13,9 @@ $input = json_decode(file_get_contents('php://input'),true);
 if ($request[0] == 'board') {
     if ((!isset($request[1])) && ($method == 'GET' || $method == 'POST')) {
         board($method);
-    } else if (isset($request[2]) && ($method == 'GET' || $method == 'PUT') ){
+    } else if ($request[1] == 'column' && ($method == 'GET' || $method == 'PUT') ){
         if ($request[2] >= 0 && $request[2] <= 6){
-            boardColumn($method, $request[2]);      
+            boardColumn($method, $request[2], $input);      
         } else {
             error();
         }
@@ -45,7 +45,7 @@ else if ($request[0] == 'players') {
 } 
 
 else if ($request[0] == 'status' && $method == 'GET') {
-    getGameStatus();
+    status();
 }
 
 else {

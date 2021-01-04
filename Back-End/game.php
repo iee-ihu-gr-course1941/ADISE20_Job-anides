@@ -1,6 +1,19 @@
 <?php
 require_once 'sql.php';
 
+function status(){
+    check_abort();
+    header('Content-type: application/json');
+    print getGameStatus();
+}
+
+function check_abort() {
+	global $mysqli;
+	
+	$sql = "UPDATE `game_status` SET `status` = 'aborted', result = IF(p_turn='r','y','r'), player_turn = NULL WHERE player_turn IS NOT NULL AND last_change < (NOW()-INTERVAL 5 MINUTE) AND `status` = 'started'";
+	$mysqli -> query($sql);
+}
+
 function getGameStatus(){
     $query = "SELECT * FROM `game_status`";
     $result = sql($query);

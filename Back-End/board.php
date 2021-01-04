@@ -14,14 +14,13 @@ function board($methodIs){
 }
 
 // show specific column
-function boardColumn($methodIs, $column){
+function boardColumn($methodIs, $column, $input){
     global $mysqli;
 
     $query = 'SELECT * FROM `game_board` WHERE `column` = '.$column;
     $result = sql($query);
     if ($methodIs == 'PUT'){
-        $colour = 'r';// na to sbiso auto
-        insert($column, $result, $colour);
+        insert($column, $result, $input);
     }
     $resultFinal = sql($query);
     header('Content-type: application/json');

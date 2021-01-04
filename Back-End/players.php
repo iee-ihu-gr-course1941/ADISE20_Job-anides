@@ -2,7 +2,7 @@
 require_once 'sql.php';
 
 function allPlayersDetails(){
-    $result = sql('SELECT * FROM `players`');
+    $result = sql('SELECT `username`, `player_colour` FROM `players`');
     header('Content-type: application/json');
     print $result;
 }
@@ -34,5 +34,11 @@ function setPlayerName($colour, $input){
     
     $query = "UPDATE `players` SET `username`= '$input', `token` = MD5(CONCAT('$input', NOW())) WHERE `player_colour` = '$colour'";
     $mysqli -> query($query);
+    
+    updateGameStatus();
+    $query1 = "SELECT * FROM `players` WHERE `player_colour` = '$colour'";
+    $result1 = sql($query1);
+    header('Content-type: application/json');
+    print $result1;
 }
 
