@@ -25,7 +25,7 @@ function setPlayerName($colour, $input){
     
     $username=$input['username'];
     $sql = "SELECT COUNT(*) AS c FROM `players` WHERE `player_colour` = '$colour' AND `username` IS NOT NULL";
-    $result = sql($sql);
+    $result = sqlNotJSON($sql);
     if ($result[0]['c'] > 0) {
         header("HTTP/1.1 400 Bad Request");
 	print json_encode(['errormesg'=>"Player $colour is already set. Please select another color."]);
