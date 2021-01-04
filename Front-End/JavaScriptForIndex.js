@@ -1,16 +1,18 @@
 
 
-$("body").onload(createTable); //Χρηση JQuery εμφανιση του πινακα 
 
-$(document).ready(function(){
-    $("body").onload(createTable); //Χρηση JQuery εμφανιση του πινακα 
-    $("#submitID").click(CheckValue); // Χρηση JQuery για οταν πατηθει το submit 
+//$("#submitID").click(CheckValue); // Χρηση JQuery για οταν πατηθει το submit 
+
+$(function (){
+    createTable();
+    fill_board();
+   // $("#submitID").click(CheckValue); // Χρηση JQuery για οταν πατηθει το submit
 });
+
 //Συναρτηση Ελεγχου πληθους γραμματων σε text
 function LengthCheck(objID){
     //Αρχικοποιηση μεταβλητων
     var objValue=objID.value; //Η τιμη του objID  
-
     if (objValue.length!=1 || objValue==""){  //ελεγχος για το πληθος των γραμματων
         return true;     
     }
@@ -21,8 +23,7 @@ function LengthCheck(objID){
 //Συναρτηση Ελεγχου Τιμης 
 function CheckValue() {
     var cellID=document.getElementById('moveCell');                           
-    var CellValue=parseInt(cellID.value);
-    
+    var CellValue=parseInt(cellID.value);    
     if ( (isNaN(CellValue)) || (LengthCheck(cellID)) || (CellValue<0) || (CellValue>6) ){
         alert("Λαθος Καταχωρηση! Δωσε σωστη τιμη στην στηλη!");
     }
@@ -31,23 +32,33 @@ function CheckValue() {
 
 //Δημιουργια πινακα
 function createTable(){
-        var tableDiv=document.getElementById('tableDiv'); 
-        var p=document.createElement("p");
-        p.setAttribute("id", "playerTurn");
-        p.innerHTML="Παιζει ο πρωτος παιχτης";
-        tableDiv.appendChild(p);
-        var table=document.createElement("table");
-        for (row=0;row<6;row++){
-            var tr=document.createElement("tr");
-            for (cell=0;cell<7;cell++){
-                var td=document.createElement("td");
-                tr.appendChild(td);
+        var t='<table id="table">';
+        for (var row=6 ; row>0 ; row--){
+            t += '<tr>';
+            for (var cell=0 ; cell<7 ; cell++){
+                t+= '<td  id="cell_'+row+'_'+cell+'"></td>'; 
             }
-            table.appendChild(tr);
+            t+='</tr>';
         }
-        tableDiv.appendChild(table);
-        table.setAttribute("id", "table");
+        t+='</table>';
+        // var p='<p id="playertrun">Παιζει πρωτος ο κιτρινος!</p>';
+        //$('#tableDiv').html(p);
+        $('#tableDiv').html(t);
 }        
+
+//Περασμα το json αρχειου
+function fill_board(){
+   $.ajax({url:"Score4.php/board/", success: fill_board_by_data});
+       
+}
+
+function fill_board_by_data(data){
+    for (var item=0 ; item<data.length ; item++){
+
+    }
+}
+
+
 
 //Γεμισμα του κελιου με το καταληλο χρωμα
 /* function ColorisedTheCell(){

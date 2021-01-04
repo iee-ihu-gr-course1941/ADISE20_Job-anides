@@ -7,17 +7,23 @@ and open the template in the editor.
 <html>
     
     <head>
-        <link rel="stylesheet" href=".\style.css">
-        <script src=".\JavaScriptForIndex.js"></script>
-        <title>TODO supply a title</title>
+        
+        <title>Score4</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+        <!-- Imports -->
+        <script src="./jquery-3.5.1.min.js"></script>
+        <link rel="stylesheet" href="./style.css">
+        <script src="./JavascriptForIndex.js"></script>
+        
+
         
     </head>
-    <body onload="CreateTable()" >
+    <body>
         <div id="container">
-            <div id="scoreboardDiv">
+          <!--  <div id="scoreboardDiv">
                 <p style='margin:0px;'>Scoreboard</p>
                 <div id="firstplayerDiv" >
                     <h4>First Player Score</h4>
@@ -28,10 +34,10 @@ and open the template in the editor.
                     <label id='splayerScore' style="color:red;font-size:21px;">0</label>            
                 </div>
                 
-            </div> 
-            
+            </div> -->
+            <p id="playerturn">Παιζει πρωτος ο κιτρινος!</p>
             <div id="tableDiv">
-            
+                
             </div>
             
             

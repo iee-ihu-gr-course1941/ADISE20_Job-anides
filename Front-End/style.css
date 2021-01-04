@@ -71,8 +71,12 @@ body {
         }
         
 
-        #playerTurn{
+        #playerturn{
             text-align:center;
             font-size: 22px;
             font-weight: bold;
+            position: absolute;
+            top: 120px;
+            left: 43%;
+            
         }
