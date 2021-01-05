@@ -23,3 +23,15 @@ function sqlNotJSON($query){
 
     return $result->fetch_all(MYSQLI_ASSOC);
 }
+
+function sqlNotJSONargs($query, $arg){
+    global $mysqli;
+
+    $sql = $query;
+    $prepare = $mysqli -> prepare($sql);
+
+    $prepare -> execute();
+    $result = $prepare -> get_result();
+
+    return $result->fetch_all(MYSQLI_ASSOC)[$arg];
+}

@@ -21,17 +21,17 @@ function getGameStatus(){
 }
 
 function updateGameStatus(){
-    $status = getGameStatus();
+    global $mysqli;
+    $status = json_decode(getGameStatus());
     $new_status = null;
     $new_turn = null;
     
     $query = 'SELECT COUNT(*) AS aborted FROM `players` WHERE `last_action` < (NOW() - INTERVAL 15 MINUTE)';
-    $resultAbort = sql($query);
-    $aborted = $resultAbort['aborted'];
+    $aborted = sqlNotJSON($query, 'aborted');
     
     if ($aborted > 0) {
-        $query = 'UPDATE `players` SET `username` = NULL, `token` = NULL WHERE `last_action` < (NOW() - INTERVAL 15 MINUTE)';
-        sql($query);
+        $query2 = 'UPDATE `players` SET `username` = NULL, `token` = NULL WHERE `last_action` < (NOW() - INTERVAL 15 MINUTE)';
+        $mysqli -> query($query2);
         if ($status['status'] == 'started') {
             $new_status = 'aborted';
         }
@@ -61,8 +61,8 @@ function updateGameStatus(){
             break;  
     }
     
-    $query = "UPDATE game_status SET `status` = '$new_status', `player_turn` = '$new_turn'";
-    sql($query);
+    $query4 = "UPDATE game_status SET `status` = '$new_status', `player_turn` = '$new_turn'";
+    sql($query4);
     
 }
 
@@ -85,6 +85,7 @@ function insert($column, $result, $tilecolour){
             $bool = True;
             $rowIndex = $row;
             $columnIndex = $column;
+            $colour = $tilecolour;
             break;
         }
     }
@@ -98,7 +99,5 @@ function insert($column, $result, $tilecolour){
     }
 }
 
-function checkWin($row, $column){
-    $counter = 1;
-    
-}
+
+
