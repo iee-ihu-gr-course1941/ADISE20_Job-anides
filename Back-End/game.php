@@ -22,23 +22,23 @@ function getGameStatus(){
 
 function updateGameStatus(){
     global $mysqli;
-    $status = json_decode(getGameStatus());
+    $status = sqlNotJSON("SELECT * FROM `game_status`");
     $new_status = null;
     $new_turn = null;
-    
+
     $query = 'SELECT COUNT(*) AS aborted FROM `players` WHERE `last_action` < (NOW() - INTERVAL 15 MINUTE)';
     $aborted = sqlNotJSON($query, 'aborted');
     
-    if ($aborted > 0) {
+    if ($aborted > 0) {        
         $query2 = 'UPDATE `players` SET `username` = NULL, `token` = NULL WHERE `last_action` < (NOW() - INTERVAL 15 MINUTE)';
         $mysqli -> query($query2);
-        if ($status['status'] == 'started') {
+        if ($status[0]['status'] == 'started') {
             $new_status = 'aborted';
         }
     }
-    $query1 = 'SELECT COUNT(*) AS counter FROM `players` WHERE `username` IS NOT NULL';
-    $result = sql($query1);
-    $active_players = $result['counter'];
+    $query1 = 'SELECT COUNT(*) AS counter FROM `players` WHERE `username` IS NOT NULL';    
+    $result = sqlNotJSON($query1);
+    $active_players = $result[0]['counter'];
     
     switch ($active_players) {
         case 0: 
@@ -60,10 +60,14 @@ function updateGameStatus(){
             }
             break;  
     }
-    
-    $query4 = "UPDATE game_status SET `status` = '$new_status', `player_turn` = '$new_turn'";
-    sql($query4);
-    
+    if (isset($new_turn)) {
+        $query4 = "UPDATE game_status SET `status` = '$new_status', `player_turn` = '$new_turn'";
+        
+    } else {
+        $query4 = "UPDATE game_status SET `status` = '$new_status', `player_turn` = $new_turn";
+    }
+    $query4 = "UPDATE game_status SET `status` = '$new_status', `player_turn` = $new_turn";
+    $mysqli -> query($query4);    
 }
 
 function insert($column, $result, $tilecolour){
