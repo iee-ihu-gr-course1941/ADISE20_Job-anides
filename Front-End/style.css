@@ -63,6 +63,7 @@ body {
             position: absolute;
             right: 40%;
             top: 80%;
+            
         }
         
         #tableDiv{
@@ -82,7 +83,7 @@ body {
                       
         }
 
-        #dbutton{
+        #dbu{
             position:absolute;
             right:30%;
             top:80%;     

@@ -5,15 +5,16 @@ var board={};
 
 $(function (){
     //createTable();
-    //fill_board();
+    //fill_board();3
+    
     $("#login").click(login_to_game);
     $('#reset').click( reset_board);
-    $('#move').click( do_move);
+   // $('#move').click( make_move);
 	$('#moveDiv').hide();
     game_status_update();
     
-    
-   // $("#submitID").click(CheckValue); // Χρηση JQuery για οταν πατηθει το submit
+
+  
 });
 
 //Συναρτηση Ελεγχου πληθους γραμματων σε text
@@ -40,6 +41,7 @@ function CheckValue() {
 
 //Εισοδος στο παιχνιδι
 function login_to_game() {
+    var u=$('#username').val();
 	if($('#username').val()=='') {
 		alert('You have to set a username');
 		return;
@@ -49,9 +51,10 @@ function login_to_game() {
 	fill_board();	
 	$.ajax({url: "../Back-End/Score4.php/players/"+p_color, 
 			method: 'PUT',
-			dataType: "json",
+            dataType: "json",
+            headers: {"X-Token": me.token},
 			contentType: 'application/json',
-			data: JSON.stringify( {username: $('#username').val(), player_colour: p_color}),
+			data: JSON.stringify( {username: u, player_colour: p_color}),
 			success: login_result,
 			error: login_error});
 }
@@ -59,14 +62,14 @@ function login_to_game() {
 //Επιτυχης Εισοδος στο παιχνιδι
 function login_result(data) {
 	me = data[0];
-	$('#loginDiv').hide();
-	//update_info();
-	//game_status_update();
+    $('#loginDiv').hide();
+	update_info();
+	game_status_update();
 }
 
 //Αποτυχημενη Συνδεση στο παιχνιδι
 function login_error(data,y,z,c) {
-	var x = data.responseJSON;
+    var x = data.responseJSON;
 	alert(x.errormesg);
 }
 
@@ -80,7 +83,7 @@ function update_info(){
 
 //Μεταφορα δεδο με json 
 function game_status_update() {
-	$.ajax({url: "../Back-End/Score4.php/status/", success: update_status,headers: {"X-Token": me.token} });
+	$.ajax({url: "../Back-End/Score4.php/status/", success: update_status, headers: {"X-Token": me.token} });
 }
 
 //Κανη update το status του παιχνιδιου 
@@ -107,10 +110,10 @@ function update_status(data) {
 //Δημιουργια πινακα
 function createTable(){
         var t='<table id="table">';
-        for (var row=5 ; row>-1 ; row--){
+        for (var row=0 ; row<6 ; row++){
             t += '<tr>';
             for (var cell=0 ; cell<7 ; cell++){
-                t+= '<td  id="cell_'+row+'_'+cell+'">  Στηλη: '+cell+'</td>'; 
+                t+= '<td  id="cell_'+row+'_'+cell+'"> Στηλη: '+cell+'</td>'; 
             }
             t+='</tr>';
         }
@@ -161,8 +164,9 @@ function reset_board() {
 	$('#loginDiv').show(2000);
 
 }
-//Ελεγχος για το αμα τελειωσε το παιχνιδι
-
 
 //Αποστολη την κινησης
-
+function make_move(){
+    CheckValue()
+    var move=$("#moveCell").val;
+}
