@@ -116,7 +116,6 @@ function checkWin($row, $column, $tilecolour){
             $cellsChecked++;
         }  
     }
-    //if ($cellsChecked == ($row * $column)) pithanos elegxos isopalias
 }
 
 function checkUpDown($row, $column, &$tilecolour, &$counter, &$board){

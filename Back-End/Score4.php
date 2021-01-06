@@ -9,10 +9,6 @@ require_once 'sql.php';
 $method = $_SERVER['REQUEST_METHOD'];
 $request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
 $input = json_decode(file_get_contents('php://input'),true);
-//$input1 = file_get_contents('php://input');
-//print "test \n";
-//header('Content-type: application/json');
-//print $input;
 
 if ($request[0] == 'board') {
     if ((!isset($request[1])) && ($method == 'GET' || $method == 'POST')) {
@@ -39,7 +35,7 @@ else if ($request[0] == 'players') {
         if ($method == 'GET'){
             playerName($request[1]);
         } else if ($method == 'PUT') {
-            setPlayerName($request[1], $input);// Na testareis an douleuei
+            setPlayerName($request[1], $input);
         } else {
             error();
         }
