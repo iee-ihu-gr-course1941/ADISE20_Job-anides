@@ -2,10 +2,10 @@
 -- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 03, 2021 at 04:11 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.11
+-- Φιλοξενητής: 127.0.0.1
+-- Χρόνος δημιουργίας: 06 Ιαν 2021 στις 18:05:55
+-- Έκδοση διακομιστή: 10.4.14-MariaDB
+-- Έκδοση PHP: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,12 +18,12 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `projectdb`
+-- Βάση δεδομένων: `projectdb`
 --
 
 DELIMITER $$
 --
--- Procedures
+-- Διαδικασίες
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `reset_board` ()  BEGIN REPLACE INTO game_board SELECT * FROM default_game_board;
 END$$
@@ -33,7 +33,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `default_game_board`
+-- Δομή πίνακα για τον πίνακα `default_game_board`
 --
 
 CREATE TABLE `default_game_board` (
@@ -43,7 +43,7 @@ CREATE TABLE `default_game_board` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `default_game_board`
+-- Άδειασμα δεδομένων του πίνακα `default_game_board`
 --
 
 INSERT INTO `default_game_board` (`row`, `column`, `tile_colour`) VALUES
@@ -93,7 +93,7 @@ INSERT INTO `default_game_board` (`row`, `column`, `tile_colour`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `game_board`
+-- Δομή πίνακα για τον πίνακα `game_board`
 --
 
 CREATE TABLE `game_board` (
@@ -103,7 +103,7 @@ CREATE TABLE `game_board` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `game_board`
+-- Άδειασμα δεδομένων του πίνακα `game_board`
 --
 
 INSERT INTO `game_board` (`row`, `column`, `tile_colour`) VALUES
@@ -153,7 +153,7 @@ INSERT INTO `game_board` (`row`, `column`, `tile_colour`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `game_status`
+-- Δομή πίνακα για τον πίνακα `game_status`
 --
 
 CREATE TABLE `game_status` (
@@ -164,7 +164,14 @@ CREATE TABLE `game_status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Triggers `game_status`
+-- Άδειασμα δεδομένων του πίνακα `game_status`
+--
+
+INSERT INTO `game_status` (`status`, `player_turn`, `result`, `last_change`) VALUES
+('initialized', 'r', NULL, '2021-01-05 11:11:25');
+
+--
+-- Δείκτες `game_status`
 --
 DELIMITER $$
 CREATE TRIGGER `game_status_update` BEFORE UPDATE ON `game_status` FOR EACH ROW BEGIN SET NEW.last_change = NOW();
@@ -175,7 +182,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `players`
+-- Δομή πίνακα για τον πίνακα `players`
 --
 
 CREATE TABLE `players` (
@@ -186,23 +193,31 @@ CREATE TABLE `players` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Indexes for dumped tables
+-- Άδειασμα δεδομένων του πίνακα `players`
+--
+
+INSERT INTO `players` (`username`, `player_colour`, `token`, `last_action`) VALUES
+(NULL, 'r', NULL, NULL),
+(NULL, 'y', NULL, NULL);
+
+--
+-- Ευρετήρια για άχρηστους πίνακες
 --
 
 --
--- Indexes for table `default_game_board`
+-- Ευρετήρια για πίνακα `default_game_board`
 --
 ALTER TABLE `default_game_board`
   ADD PRIMARY KEY (`row`,`column`);
 
 --
--- Indexes for table `game_board`
+-- Ευρετήρια για πίνακα `game_board`
 --
 ALTER TABLE `game_board`
   ADD PRIMARY KEY (`row`,`column`);
 
 --
--- Indexes for table `players`
+-- Ευρετήρια για πίνακα `players`
 --
 ALTER TABLE `players`
   ADD PRIMARY KEY (`player_colour`);

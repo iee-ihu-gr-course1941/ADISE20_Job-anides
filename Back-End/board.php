@@ -21,6 +21,11 @@ function boardColumn($methodIs, $column, $input){
     $result = sql($query);
     if ($methodIs == 'PUT'){
         insert($column, $result, $input);
+        if ($input == 'r'){
+            $mysqli -> query("UPDATE `game_status` SET `player_turn`= 'r'");
+        } else {
+            $mysqli -> query("UPDATE `game_status` SET `player_turn`= 'y'");
+        }
     }
     $resultFinal = sql($query);
     header('Content-type: application/json');

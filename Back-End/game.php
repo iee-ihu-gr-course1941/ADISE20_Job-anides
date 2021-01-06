@@ -111,9 +111,7 @@ function checkWin($row, $column, $tilecolour){
         for ($cell = 0; $cell < count($board); $cell++){
             if ($board[$cell]['row'] == $row && $board[$cell]['column'] == $column){
                 checkUpDown($row, $column, $tilecolour, $counter, $board);
-                if ($counter >= 4){
-                    // win
-                }
+                checkLeftRight($row, $column, $tilecolour, $counter, $board);
             }
             $cellsChecked++;
         }  
@@ -144,6 +142,21 @@ function checkLeftRight($row, $column, &$tilecolour, &$counter, &$board){
     
     if ($counter < 4){
         checkRight($row, $column, $tilecolour, $counter, $board);
+    } else {
+        return;
+    }
+}
+
+// apo aristera katw mexri deksia panw elegxos
+function checkDiagonalDownLeftToUpRight($row, $column, &$tilecolour, &$counter, &$board){
+    if ($counter < 4){
+        checkDownLeft($row, $column, $tilecolour, $counter, $board);
+    } else {
+        return;
+    }
+    
+    if ($counter < 4){
+        checkUpRight($row, $column, $tilecolour, $counter, $board);
     } else {
         return;
     }
@@ -222,6 +235,29 @@ function checkLeft($row, $column, &$tilecolour, &$counter, &$board){
 function checkRight($row, $column, &$tilecolour, &$counter, &$board){
     if ($counter < 4){ // aparaithtos elegxos gia ton termatismo ths anadromhs
         if ($column >= 0 && $column < 6){ 
+            for ($cell = 0; $cell < count($board); $cell++){
+                if ($board[$cell]['row'] == $row && $board[$cell]['column'] == ($column - 1)){
+                    if ($board[$cell]['tile_colour'] == $tilecolour){
+                        $counter++;
+                        checkLeft($row, $column + 1, $tilecolour, $counter, $board);
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            } 
+        } else {
+            return;
+        }
+    }
+    else {
+        return;
+    }
+}
+
+function checkDownLeft($row, $column, &$tilecolour, &$counter, &$board){
+    if ($counter < 4){ // aparaithtos elegxos gia ton termatismo ths anadromhs
+        if ($column > 0 && $column <= 6){ 
             for ($cell = 0; $cell < count($board); $cell++){
                 if ($board[$cell]['row'] == $row && $board[$cell]['column'] == ($column - 1)){
                     if ($board[$cell]['tile_colour'] == $tilecolour){
