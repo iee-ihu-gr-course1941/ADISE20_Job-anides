@@ -93,7 +93,7 @@ function game_status_update() {
 function update_status(data) {
     last_update=new Date().getTime();
     var game_status_old=game_status;
-	game_status=data;
+	game_status=data[0];
 	update_info();
 	if(game_status.player_turn==me.player_colour &&  me.player_colour!='') { //ισως χρειαστη αλλαγη σε null
 		x=0;
