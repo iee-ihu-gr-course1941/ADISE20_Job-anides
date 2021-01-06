@@ -83,8 +83,7 @@ function insert($column, $result, $tilecolour){
     }
     
     for ($row = count($insertMove) - 1; $row >= 0; $row--) {
-        if($insertMove[$row] == null || $insertMove[$row] == ''){
-            print "titlecolour: ".$tilecolour." ". gettype($tilecolour);
+        if($insertMove[$row] == null || $insertMove[$row] == ''){    
             $query = "UPDATE `game_board` SET `tile_colour`= '$tilecolour' WHERE `row` = $row AND `column` = $column";
             sql($query);
             $bool = True;
