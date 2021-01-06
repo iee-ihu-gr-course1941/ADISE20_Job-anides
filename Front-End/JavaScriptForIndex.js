@@ -179,7 +179,7 @@ function reset_board() {
 function make_move(){
     CheckValue()
     var move=$('#moveCell').val();
-    $.ajax({url:"../Back-End/Score4.php/board/column"+move,
+    $.ajax({url:"../Back-End/Score4.php/board/column/"+move,
             method: 'PUT',
             dataType: "json",
             contentType: 'application/json',
