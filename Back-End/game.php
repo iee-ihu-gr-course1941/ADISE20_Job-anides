@@ -95,7 +95,7 @@ function insert($column, $result, $tilecolour){
     }
     
     if ($bool) {
-        checkWin($rowIndex, $columnIndex);
+        checkWin($rowIndex, $columnIndex, $tilecolour);
     } else {
         header("HTTP/1.1 400 Bad Request");
 	print json_encode(['errormesg'=>"Column is full."]);
