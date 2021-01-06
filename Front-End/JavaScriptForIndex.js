@@ -177,13 +177,16 @@ function reset_board() {
 
 //Αποστολη την κινησης
 function make_move(){
-    CheckValue()
     var move=$('#moveCell').val();
+    var color=$('#pcolor').val();    
+    if ( (isNaN(CellValue)) || (LengthCheck(cellID)) || (CellValue<0) || (CellValue>6) ){
+        alert("Λαθος Καταχωρηση! Δωσε σωστη τιμη στην στηλη!");
+    }
     $.ajax({url:"../Back-End/Score4.php/board/column/"+move,
             method: 'PUT',
             dataType: "json",
             contentType: 'application/json',
-            data: JSON.stringify( {cell: move}),
+            data: JSON.stringify( {pcolor: color}),
             headers: {"X-Token": me.token},
             success: move_result,
             error: login_error});
