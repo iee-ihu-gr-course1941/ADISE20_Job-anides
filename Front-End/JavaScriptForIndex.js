@@ -30,15 +30,6 @@ function LengthCheck(objID){
     
 }
 
-//Συναρτηση Ελεγχου Τιμης 
-function CheckValue() {
-    var cellID=document.getElementById('moveCell');                           
-    var CellValue=parseInt(cellID.value);    
-    if ( (isNaN(CellValue)) || (LengthCheck(cellID)) || (CellValue<0) || (CellValue>6) ){
-        alert("Λαθος Καταχωρηση! Δωσε σωστη τιμη στην στηλη!");
-    }
-                  
-}
 
 
 //Εισοδος στο παιχνιδι
@@ -58,8 +49,15 @@ function login_to_game() {
 			contentType: 'application/json',
 			data: JSON.stringify( {username: u, player_colour: p_color}),
 			success: login_result,
-			error: login_error});
+            error: login_error});
+
+    if(me.player_colour!=null && game_status.player_turn==me.player_colour) {
+        $('#move_div').show(1000);
+    } else {
+        $('#move_div').hide(1000);
+    }
 }
+
 
 //Επιτυχης Εισοδος στο παιχνιδι
 function login_result(data) {
@@ -72,7 +70,7 @@ function login_result(data) {
 //Αποτυχημενη Συνδεση στο παιχνιδι
 function login_error(data,y,z,c) {
     var x = data.responseJSON;
-	//alert(x.errormesg);
+	alert(x.errormesg);
 }
 
 
@@ -94,11 +92,12 @@ function update_status(data) {
     last_update=new Date().getTime();
     var game_status_old=game_status;
 	game_status=data[0];
-	update_info();
+    update_info();
+    clearTimeout(timer);
 	if(game_status.player_turn==me.player_colour &&  me.player_colour!='') { //ισως χρειαστη αλλαγη σε null
 		x=0;
         // do play
-        if (game_status_old.player_turn!=me.player_colour){
+        if (game_status_old.player_turn!=game_status.player_turn){
             fill_board();
         }
 		$('#moveDiv').show(1000);
@@ -199,6 +198,6 @@ function make_move(){
 
 //Εμφανιση κινησης
 function move_result(data){
-   // game_status_update();
+    game_status_update();
 	fill_board_by_data(data);
 }
