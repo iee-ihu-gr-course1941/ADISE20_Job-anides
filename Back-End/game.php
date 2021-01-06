@@ -148,7 +148,7 @@ function checkLeftRight($row, $column, &$tilecolour, &$counter, &$board){
 }
 
 // apo aristera katw mexri deksia panw elegxos
-function checkDiagonalDownLeftToUpRight($row, $column, &$tilecolour, &$counter, &$board){
+function checkDiagonalDownLeftUpRight($row, $column, &$tilecolour, &$counter, &$board){
     if ($counter < 4){
         checkDownLeft($row, $column, $tilecolour, $counter, $board);
     } else {
@@ -157,6 +157,20 @@ function checkDiagonalDownLeftToUpRight($row, $column, &$tilecolour, &$counter, 
     
     if ($counter < 4){
         checkUpRight($row, $column, $tilecolour, $counter, $board);
+    } else {
+        return;
+    }
+}
+
+function checkDiagonalUpLeftDownRight($row, $column, &$tilecolour, &$counter, &$board){
+    if ($counter < 4){
+        checkUpLeft($row, $column, $tilecolour, $counter, $board);
+    } else {
+        return;
+    }
+    
+    if ($counter < 4){
+        checkDownRight($row, $column, $tilecolour, $counter, $board);
     } else {
         return;
     }
@@ -236,7 +250,7 @@ function checkRight($row, $column, &$tilecolour, &$counter, &$board){
     if ($counter < 4){ // aparaithtos elegxos gia ton termatismo ths anadromhs
         if ($column >= 0 && $column < 6){ 
             for ($cell = 0; $cell < count($board); $cell++){
-                if ($board[$cell]['row'] == $row && $board[$cell]['column'] == ($column - 1)){
+                if ($board[$cell]['row'] == $row && $board[$cell]['column'] == ($column + 1)){
                     if ($board[$cell]['tile_colour'] == $tilecolour){
                         $counter++;
                         checkLeft($row, $column + 1, $tilecolour, $counter, $board);
@@ -257,12 +271,81 @@ function checkRight($row, $column, &$tilecolour, &$counter, &$board){
 
 function checkDownLeft($row, $column, &$tilecolour, &$counter, &$board){
     if ($counter < 4){ // aparaithtos elegxos gia ton termatismo ths anadromhs
-        if ($column > 0 && $column <= 6){ 
+        if (($column > 0 && $column <= 6) && ($row >= 0 && $row < 5)){ 
             for ($cell = 0; $cell < count($board); $cell++){
-                if ($board[$cell]['row'] == $row && $board[$cell]['column'] == ($column - 1)){
+                if ($board[$cell]['row'] == ($row + 1) && $board[$cell]['column'] == ($column - 1)){
                     if ($board[$cell]['tile_colour'] == $tilecolour){
                         $counter++;
-                        checkLeft($row, $column + 1, $tilecolour, $counter, $board);
+                        checkLeft($row + 1, $column - 1, $tilecolour, $counter, $board);
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            } 
+        } else {
+            return;
+        }
+    }
+    else {
+        return;
+    }
+}
+
+function checkUpRight($row, $column, &$tilecolour, &$counter, &$board){
+    if ($counter < 4){ // aparaithtos elegxos gia ton termatismo ths anadromhs
+        if (($column >= 0 && $column < 6) && ($row > 0 && $row <= 5)){ 
+            for ($cell = 0; $cell < count($board); $cell++){
+                if ($board[$cell]['row'] == ($row - 1) && $board[$cell]['column'] == ($column + 1)){
+                    if ($board[$cell]['tile_colour'] == $tilecolour){
+                        $counter++;
+                        checkLeft($row - 1, $column + 1, $tilecolour, $counter, $board);
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            } 
+        } else {
+            return;
+        }
+    }
+    else {
+        return;
+    }
+}
+
+function checkUpLeft($row, $column, &$tilecolour, &$counter, &$board){
+    if ($counter < 4){ // aparaithtos elegxos gia ton termatismo ths anadromhs
+        if (($column > 0 && $column <= 6) && ($row > 0 && $row <= 5)){ 
+            for ($cell = 0; $cell < count($board); $cell++){
+                if ($board[$cell]['row'] == ($row - 1) && $board[$cell]['column'] == ($column - 1)){
+                    if ($board[$cell]['tile_colour'] == $tilecolour){
+                        $counter++;
+                        checkLeft($row - 1, $column - 1, $tilecolour, $counter, $board);
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            } 
+        } else {
+            return;
+        }
+    }
+    else {
+        return;
+    }
+}
+
+function checkDownRight($row, $column, &$tilecolour, &$counter, &$board){
+    if ($counter < 4){ // aparaithtos elegxos gia ton termatismo ths anadromhs
+        if (($column >= 0 && $column < 6) && ($row >= 0 && $row < 5)){ 
+            for ($cell = 0; $cell < count($board); $cell++){
+                if ($board[$cell]['row'] == ($row + 1) && $board[$cell]['column'] == ($column + 1)){
+                    if ($board[$cell]['tile_colour'] == $tilecolour){
+                        $counter++;
+                        checkLeft($row + 1, $column + 1, $tilecolour, $counter, $board);
                         break;
                     } else {
                         break;
