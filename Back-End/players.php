@@ -14,7 +14,6 @@ function playerName($colour){
     print $result;
 }
 
-// Na testareis an douleuei
 function setPlayerName($colour, $input){
     global $mysqli;
     if(!isset($input['username'])) {
