@@ -199,6 +199,6 @@ function make_move(){
 
 //Εμφανιση κινησης
 function move_result(data){
-    game_status_update();
+   // game_status_update();
 	fill_board_by_data(data);
 }
