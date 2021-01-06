@@ -85,7 +85,7 @@ function insert($column, $result, $tilecolour){
     for ($row = count($insertMove) - 1; $row >= 0; $row--) {
         if($insertMove[$row] == null || $insertMove[$row] == ''){    
             $query = "UPDATE `game_board` SET `tile_colour`= '$tilecolour' WHERE `row` = $row AND `column` = $column";
-            sql($query);
+            $mysqli -> query($query);
             $bool = True;
             $rowIndex = $row;
             $columnIndex = $column;
@@ -109,7 +109,6 @@ function checkWin($row, $column, $tilecolour){
     if (($row >= 0 && $row <= 5) && ($column >= 0 && $column <= 6)){
         $board = sqlNotJSON('SELECT * FROM `game_board`');
         for ($cell = 0; $cell < count($board); $cell++){
-            print "row: $row \ncolumn: $column \ncell: $cell";
             if ($board[$cell]['row'] == $row && $board[$cell]['column'] == $column){
                 checkUpDown($row, $column, $tilecolour, $counter, $board);
                 if ($counter >= 4){
