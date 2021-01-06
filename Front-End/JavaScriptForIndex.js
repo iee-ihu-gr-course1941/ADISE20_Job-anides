@@ -2,14 +2,16 @@
 var me={};
 var game_status={};
 var board={};
+var last_update=new Date().getTime();
+var timer=null;
 
 $(function (){
-    //createTable();
-    //fill_board();3
+    createTable();
+    fill_board();
     
     $("#login").click(login_to_game);
     $('#reset').click( reset_board);
-   // $('#move').click( make_move);
+    $('#move').click( make_move);
 	$('#moveDiv').hide();
     game_status_update();
     
@@ -83,13 +85,15 @@ function update_info(){
 
 //Μεταφορα δεδο με json 
 function game_status_update() {
+    clearTimeout(timer);
 	$.ajax({url: "../Back-End/Score4.php/status/", success: update_status, headers: {"X-Token": me.token} });
 }
 
 //Κανη update το status του παιχνιδιου 
 function update_status(data) {
+    last_update=new Date().getTime();
     var game_status_old=game_status;
-	game_status=data[0];
+	game_status=data;
 	update_info();
 	if(game_status.player_turn==me.player_colour &&  me.player_colour!='') { //ισως χρειαστη αλλαγη σε null
 		x=0;
@@ -133,6 +137,12 @@ function fill_board(){
        
 }
 
+function fill_board() {
+	$.ajax({url: "../Back-End/Score4.php/board/", 
+		headers: {"X-Token": me.token},
+		success: fill_board_by_data });
+}
+
 //Γεμισμα του board με τα χτοιχεια απο το json αρχειο που επεστρεψε η fill_board()[method:get] 
 function fill_board_by_data(data){
     board=data;
@@ -169,4 +179,19 @@ function reset_board() {
 function make_move(){
     CheckValue()
     var move=$("#moveCell").val;
+    $.ajax({url:"../Back-End/Score4.php/board/piece/"+move,
+            method: 'PUT',
+            dataType: "json",
+            contentType: 'application/json',
+            data: JSON.stringify( {cell: move}),
+            headers: {"X-Token": me.token},
+            success: move_result,
+            error: login_error});
+
+}
+
+//Εμφανιση κινησης
+function move_result(data){
+    game_status_update();
+	fill_board_by_data(data);
 }
