@@ -177,12 +177,13 @@ function reset_board() {
 
 //Αποστολη την κινησης
 function make_move(){
-    var move=$('#moveCell').val();
+    var cellID=document.getElementById('moveCell');                           
     var color=$('#pcolor').val();    
-    if ( (isNaN(CellValue)) || (LengthCheck(cellID)) || (CellValue<0) || (CellValue>6) ){
+    var move=$('#moveCell').val();
+    if ( (isNaN(move)) || (LengthCheck(cellID)) || (move<0) || (move>6) ){
         alert("Λαθος Καταχωρηση! Δωσε σωστη τιμη στην στηλη!");
-    }
-    $.ajax({url:"../Back-End/Score4.php/board/column/"+move,
+    }else{
+        $.ajax({url:"../Back-End/Score4.php/board/column/"+move,
             method: 'PUT',
             dataType: "json",
             contentType: 'application/json',
@@ -190,6 +191,9 @@ function make_move(){
             headers: {"X-Token": me.token},
             success: move_result,
             error: login_error});
+    }
+    
+    
 
 }
 
