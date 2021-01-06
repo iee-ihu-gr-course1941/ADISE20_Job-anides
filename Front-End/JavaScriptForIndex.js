@@ -51,11 +51,6 @@ function login_to_game() {
 			success: login_result,
             error: login_error});
 
-    if(me.player_colour!=null && game_status.player_turn==me.player_colour) {
-        $('#move_div').show(1000);
-    } else {
-        $('#move_div').hide(1000);
-    }
 }
 
 
@@ -124,17 +119,7 @@ function createTable(){
         $('#tableDiv').html(t);
 }        
 
-//Περασμα το json αρχειου με get 
-function fill_board(){
-  // $.ajax({url:"../Back-End/Score4.php/board/", success: fill_board_by_data});
-   $.ajax({url: "../Back-End/Score4.php/board/", 
-		headers: {"X-Token": me.token},
-			//dataType: "json",
-			//contentType: 'application/json',
-			//data: JSON.stringify( {token: me.token}),
-			success: fill_board_by_data });
-       
-}
+
 
 function fill_board() {
 	$.ajax({url: "../Back-End/Score4.php/board/", 
@@ -163,6 +148,12 @@ function fill_board_by_data(data){
                 break;
         }
 
+    }
+
+    if(me.player_colour!=null && game_status.player_turn==me.player_colour) {
+        $('#move_div').show(1000);
+    } else {
+        $('#move_div').hide(1000);
     }
 }
 
