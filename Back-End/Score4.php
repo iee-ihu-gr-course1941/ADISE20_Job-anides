@@ -9,13 +9,17 @@ require_once 'sql.php';
 $method = $_SERVER['REQUEST_METHOD'];
 $request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
 $input = json_decode(file_get_contents('php://input'),true);
+//$input1 = file_get_contents('php://input');
+//print "test \n";
+//header('Content-type: application/json');
+//print $input;
 
 if ($request[0] == 'board') {
     if ((!isset($request[1])) && ($method == 'GET' || $method == 'POST')) {
         board($method);
     } else if ($request[1] == 'column' && ($method == 'GET' || $method == 'PUT') ){
         if ($request[2] >= 0 && $request[2] <= 6){
-            boardColumn($method, $request[2], $input);      
+            boardColumn($method, $request[2], $input['pcolor']);      
         } else {
             error();
         }
