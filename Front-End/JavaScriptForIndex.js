@@ -151,9 +151,9 @@ function fill_board_by_data(data){
     }
 
     if(me.player_colour!=null && game_status.player_turn==me.player_colour) {
-        $('#move_div').show(1000);
+        $('#moveDiv').show(1000);
     } else {
-        $('#move_div').hide(1000);
+        $('#moveDiv').hide(1000);
     }
 }
 
